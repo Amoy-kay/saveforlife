@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save for Life - Multi-Currency Savings App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+    <!-- App Container -->
+    <div id="app" class="app-container">
+        
+        <!-- Onboarding Screen -->
+        <div id="onboarding" class="onboarding-container" style="display: none;">
+            <div class="onboarding-content">
+                <!-- Progress Indicator -->
+                <div class="progress-indicator">
+                    <div class="progress-bar">
+                        <div id="progress-fill" class="progress-fill"></div>
+                    </div>
+                    <div class="progress-steps">
+                        <div class="step-indicator active" data-step="1">
+                            <div class="step-circle">1</div>
+                            <span class="step-label">Language</span>
+                        </div>
+                        <div class="step-indicator" data-step="2">
+                            <div class="step-circle">2</div>
+                            <span class="step-label">Personal</span>
+                        </div>
+                        <div class="step-indicator" data-step="3">
+                            <div class="step-circle">3</div>
+                            <span class="step-label">Banking</span>
+                        </div>
+                        <div class="step-indicator" data-step="4">
+                            <div class="step-circle">4</div>
+                            <span class="step-label">Savings</span>
+                        </div>
+                        <div class="step-indicator" data-step="5">
+                            <div class="step-circle">5</div>
+                            <span class="step-label">Notifications</span>
+                        </div>
+                        <div class="step-indicator" data-step="6">
+                            <div class="step-circle">6</div>
+                            <span class="step-label">AI Assistant</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 1: Language and Country -->
+                <div id="step-1" class="onboarding-step active">
+                    <div class="step-header">
+                        <h2>Welcome to Save for Life</h2>
+                        <p>Let's get started by choosing your language and country</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="language">Language</label>
+                        <select id="language" class="input-field">
+                            <option value="en">English</option>
+                            <option value="es">Español</option>
+                            <option value="fr">Français</option>
+                            <option value="pt">Português</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <select id="country" class="input-field">
+                            <option value="US">United States</option>
+                            <option value="JM">Jamaica</option>
+                            <option value="CA">Canada</option>
+                            <option value="GB">United Kingdom</option>
+                            <option value="AU">Australia</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Step 2: Personal Information -->
+                <div id="step-2" class="onboarding-step">
+                    <div class="step-header">
+                        <h2>Personal Information</h2>
+                        <p>Tell us about yourself to get started</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="fullName">Full Name *</label>
+                        <input type="text" id="fullName" class="input-field" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age *</label>
+                        <input type="number" id="age" class="input-field" min="18" max="100" placeholder="Enter your age" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Gender (Optional)</label>
+                        <select id="gender" class="input-field">
+                            <option value="">Prefer not to say</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" class="input-field" placeholder="your.email@gmail.com" required>
+                    </div>
+                </div>
+
+                <!-- Step 3: Banking Information -->
+                <div id="step-3" class="onboarding-step">
+                    <div class="step-header">
+                        <h2>Banking Information</h2>
+                        <p>Connect your bank account for automated savings</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="bankName">Bank Name</label>
+                        <select id="bankName" class="input-field">
+                            <option value="">Select your bank</option>
+                            <option value="chase">Chase Bank</option>
+                            <option value="bankofamerica">Bank of America</option>
+                            <option value="wellsfargo">Wells Fargo</option>
+                            <option value="citibank">Citibank</option>
+                            <option value="capitalone">Capital One</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="accountNumber">Account Number</label>
+                        <input type="text" id="accountNumber" class="input-field" placeholder="Enter account number" maxlength="12">
+                    </div>
+                    <div class="form-group">
+                        <label for="routingNumber">Routing Number</label>
+                        <input type="text" id="routingNumber" class="input-field" placeholder="Enter routing number" maxlength="9">
+                    </div>
+                    <div class="security-notice">
+                        <i data-lucide="shield-check"></i>
+                        <span>Your banking information is encrypted and secure</span>
+                    </div>
+                </div>
+
+                <!-- Step 4: Savings Configuration -->
+                <div id="step-4" class="onboarding-step">
+                    <div class="step-header">
+                        <h2>Savings Configuration</h2>
+                        <p>Set up your automated savings plan</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="withdrawalAmount">Weekly Withdrawal Amount</label>
+                        <div class="currency-input">
+                            <span class="currency-symbol">$</span>
+                            <input type="number" id="withdrawalAmount" class="input-field currency-field" placeholder="50" min="1">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="withdrawalFrequency">Withdrawal Frequency</label>
+                        <select id="withdrawalFrequency" class="input-field">
+                            <option value="daily">Daily</option>
+                            <option value="weekly" selected>Weekly</option>
+                            <option value="biweekly">Every 2 weeks</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="savingsCurrency">Savings Currency</label>
+                        <select id="savingsCurrency" class="input-field">
+                            <option value="USD">USD ($)</option>
+                            <option value="JMD">JMD (J$)</option>
+                            <option value="EUR">EUR (€)</option>
+                            <option value="GBP">GBP (£)</option>
+                            <option value="CAD">CAD (C$)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="localCurrency">Display Currency</label>
+                        <div class="toggle-group">
+                            <span>Would you like to see balance in your local currency?</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="showLocalCurrency" checked>
+                                <label for="showLocalCurrency" class="toggle-label">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                                <span class="toggle-text">Yes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 5: Notification Settings -->
+                <div id="step-5" class="onboarding-step">
+                    <div class="step-header">
+                        <h2>Notification Preferences</h2>
+                        <p>Choose when you'd like to receive savings updates</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="balanceNotifications">Balance Notifications</label>
+                        <p class="form-description">When would you like to receive balance updates?</p>
+                        <select id="balanceNotifications" class="input-field">
+                            <option value="daily">Daily</option>
+                            <option value="weekly" selected>Weekly</option>
+                            <option value="monthly">Monthly</option>
+                            <option value="milestone">Only on milestones</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Preferred Notification Months</label>
+                        <p class="form-description">Select two months to receive detailed reports</p>
+                        <div class="month-selector">
+                            <select id="notificationMonth1" class="input-field">
+                                <option value="">Select month</option>
+                                <option value="1">January</option>
+                                <option value="2">February</option>
+                                <option value="3">March</option>
+                                <option value="4">April</option>
+                                <option value="5">May</option>
+                                <option value="6">June</option>
+                                <option value="7">July</option>
+                                <option value="8">August</option>
+                                <option value="9">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                            <select id="notificationMonth2" class="input-field">
+                                <option value="">Select month</option>
+                                <option value="1">January</option>
+                                <option value="2">February</option>
+                                <option value="3">March</option>
+                                <option value="4">April</option>
+                                <option value="5">May</option>
+                                <option value="6">June</option>
+                                <option value="7">July</option>
+                                <option value="8">August</option>
+                                <option value="9">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 6: AI Assistant -->
+                <div id="step-6" class="onboarding-step">
+                    <div class="step-header">
+                        <h2>Meet Your AI Assistant</h2>
+                        <p>Customize your personal savings coach</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="aiName">AI Assistant Name</label>
+                        <input type="text" id="aiName" class="input-field" placeholder="e.g., Alex, Sam, Maya" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="aiGender">AI Assistant Gender</label>
+                        <select id="aiGender" class="input-field">
+                            <option value="neutral">Neutral</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                    <div class="ai-preview">
+                        <div class="ai-avatar">
+                            <div class="avatar-circle" id="avatarCircle">
+                                <i data-lucide="user"></i>
+                            </div>
+                        </div>
+                        <div class="ai-intro">
+                            <h3 id="aiPreviewName">Your AI Assistant</h3>
+                            <p>I'll help you reach your savings goals! Let me know if you have any questions.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="step-navigation">
+                    <button id="prevBtn" class="btn btn-secondary" style="display: none;">
+                        <i data-lucide="arrow-left"></i>
+                        Previous
+                    </button>
+                    <button id="nextBtn" class="btn btn-primary">
+                        Next
+                        <i data-lucide="arrow-right"></i>
+                    </button>
+                    <button id="completeBtn" class="btn btn-primary" style="display: none;">
+                        Complete Setup
+                        <i data-lucide="check"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main App Interface -->
+        <div id="mainApp" class="main-app" style="display: none;">
+            <!-- Header -->
+            <header class="app-header">
+                <div class="header-content">
+                    <div class="greeting">
+                        <h1 id="welcomeMessage">Good morning!</h1>
+                        <p id="aiMessage">Let me help you save today!</p>
+                    </div>
+                    <div class="header-actions">
+                        <button class="icon-btn" id="notificationsBtn">
+                            <i data-lucide="bell"></i>
+                        </button>
+                        <button class="icon-btn" id="settingsBtn">
+                            <i data-lucide="settings"></i>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Balance Dashboard -->
+                <section class="balance-section">
+                    <div class="balance-card" id="balanceCard">
+                        <div class="balance-header">
+                            <h3>Total Savings</h3>
+                            <div class="currency-toggle" id="currencyToggle">
+                                <button class="currency-btn active" data-currency="local">USD</button>
+                                <button class="currency-btn" data-currency="savings">JMD</button>
+                            </div>
+                        </div>
+                        <div class="balance-amount">
+                            <div class="amount-display">
+                                <span class="currency-symbol" id="currencySymbol">$</span>
+                                <span class="amount" id="balanceAmount">2,847.50</span>
+                            </div>
+                            <div class="secondary-amount" id="secondaryAmount">
+                                J$ 450,000.00
+                            </div>
+                        </div>
+                        <div class="balance-info">
+                            <div class="info-item">
+                                <span class="label">Next withdrawal</span>
+                                <span class="value">Friday, Dec 15</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">This month saved</span>
+                                <span class="value">$200.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Quick Actions -->
+                <section class="actions-section">
+                    <h2 class="section-title">Quick Actions</h2>
+                    <div class="actions-grid">
+                        <button class="action-card" id="withdrawBtn">
+                            <div class="action-icon">
+                                <i data-lucide="credit-card"></i>
+                            </div>
+                            <div class="action-content">
+                                <h3>Withdraw</h3>
+                                <p>Available Dec 31, 2025</p>
+                            </div>
+                            <div class="action-arrow">
+                                <i data-lucide="chevron-right"></i>
+                            </div>
+                        </button>
+                        <button class="action-card" id="scheduleBtn">
+                            <div class="action-icon">
+                                <i data-lucide="calendar"></i>
+                            </div>
+                            <div class="action-content">
+                                <h3>Schedule</h3>
+                                <p>Change withdrawal settings</p>
+                            </div>
+                            <div class="action-arrow">
+                                <i data-lucide="chevron-right"></i>
+                            </div>
+                        </button>
+                        <button class="action-card" id="goalsBtn">
+                            <div class="action-icon">
+                                <i data-lucide="target"></i>
+                            </div>
+                            <div class="action-content">
+                                <h3>Savings Goals</h3>
+                                <p>Track your progress</p>
+                            </div>
+                            <div class="action-arrow">
+                                <i data-lucide="chevron-right"></i>
+                            </div>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Recent Activity -->
+                <section class="activity-section">
+                    <h2 class="section-title">Recent Activity</h2>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon success">
+                                <i data-lucide="trending-up"></i>
+                            </div>
+                            <div class="activity-content">
+                                <h4>Weekly deposit</h4>
+                                <p>+$50.00 USD • Nov 18, 2025</p>
+                            </div>
+                            <div class="activity-amount">+$50.00</div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon info">
+                                <i data-lucide="bell"></i>
+                            </div>
+                            <div class="activity-content">
+                                <h4>Milestone reached!</h4>
+                                <p>You've saved $2,500 USD</p>
+                            </div>
+                            <div class="activity-time">Nov 15</div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i data-lucide="trending-up"></i>
+                            </div>
+                            <div class="activity-content">
+                                <h4>Weekly deposit</h4>
+                                <p>+$50.00 USD • Nov 11, 2025</p>
+                            </div>
+                            <div class="activity-amount">+$50.00</div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="bottom-nav">
+                <button class="nav-item active" data-tab="dashboard">
+                    <i data-lucide="home"></i>
+                    <span>Dashboard</span>
+                </button>
+                <button class="nav-item" data-tab="goals">
+                    <i data-lucide="target"></i>
+                    <span>Goals</span>
+                </button>
+                <button class="nav-item" data-tab="ai">
+                    <i data-lucide="message-circle"></i>
+                    <span>AI Assistant</span>
+                </button>
+                <button class="nav-item" data-tab="settings">
+                    <i data-lucide="user"></i>
+                    <span>Profile</span>
+                </button>
+            </nav>
+        </div>
+
+        <!-- AI Chat Modal -->
+        <div id="aiChatModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Chat with <span id="chatAiName">Your AI Assistant</span></h3>
+                    <button class="modal-close" id="closeChatModal">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+                <div class="chat-container">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message ai-message">
+                            <div class="message-avatar">
+                                <i data-lucide="user"></i>
+                            </div>
+                            <div class="message-content">
+                                <p>Hello! I'm here to help you reach your savings goals. How can I assist you today?</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="chatInput" placeholder="Ask me anything about your savings...">
+                        <button id="sendMessageBtn" class="btn btn-primary">
+                            <i data-lucide="send"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+                <p>Setting up your account...</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
